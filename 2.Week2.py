@@ -65,6 +65,7 @@ def operations_menu(item="", list=[]):
         f"Create new {item}",
         f"Update {item}",
         f"Delete {item}",
+        f"View updated {item} menu"
     ]
     print("\nPlease select from the below:")
     print(number_items(options))
@@ -78,16 +79,19 @@ def operations_menu(item="", list=[]):
         return operations_menu(item, list)
 
     elif y == 3:
-        return create(item, list), post_updates_menu(item, list)
+        return create(item, list), operations_menu(item, list)
 
     elif y == 4:
         number_items(list)
-        return update(item, list), post_updates_menu(item, list)
+        return update(item, list), operations_menu(item, list)
 
     elif y == 5:
         number_items(list)
-        return delete(item, list), post_updates_menu(item, list)
+        return delete(item, list), operations_menu(item, list)
 
+    elif y==6:
+        return post_updates_menu(item, list)
+    
     else:
         print("\nPlease select a valid option ")
         return operations_menu(item, list)
@@ -96,8 +100,8 @@ def operations_menu(item="", list=[]):
 # View updated menu
 def post_updates_menu(item="", list=[]):
     options = [
-        "Show updated menu",
-        "Make another update to the menu",
+        f"Show updated {item} menu",
+        f"Make another update to the {item} menu",
         "Return to main menu",
         "Exit app",
     ]
