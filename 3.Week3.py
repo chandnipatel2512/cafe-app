@@ -1,7 +1,7 @@
 from List_Functions import number_items, create, update, delete
 from File_Functions import load_data
 
-# Load products and couriers data (txt files)
+# Load products and couriers data
 load_data("Products.txt")
 products = list1
 
