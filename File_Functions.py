@@ -1,4 +1,5 @@
-def load_data(filename, item = ""):
+#Load file
+def load_data(filename):
     try:
         file = open(filename)
     except:
@@ -7,7 +8,3 @@ def load_data(filename, item = ""):
     list1 = file.readlines()
     file.close()
     list1 = list(map(str.strip,list1))
-    
-load_data("Couriers.txt")
-couriers = list1
-print(couriers)
