@@ -1,4 +1,4 @@
-#Load file
+# Load txt file
 def load_data(filename):
     try:
         file = open(filename)
