@@ -27,7 +27,7 @@ def main_menu():
         print("\nThe current couriers are as follows:")
         number_items(couriers)
         return operations_menu("courier", couriers)
-
+''
     else:
         print("\nPlease select a valid option ")
         return main_menu()
