@@ -17,10 +17,12 @@ def save_txt_data(filename, list=[]):
     file = open(filename, "w+")
     file.write(updated_items)
     file.close()
-    
-    
+
+
 # Open csv file
 import csv
+
+
 def load_csv_data(filename: str):
     with open(filename, mode="r") as csv_file:
         csv_read = csv.DictReader(csv_file)
@@ -28,6 +30,3 @@ def load_csv_data(filename: str):
         for line in csv_read:
             data.append(line)
     return data
-
-
-load_csv_data("Orders.csv")

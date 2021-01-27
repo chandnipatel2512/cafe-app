@@ -1,6 +1,5 @@
 # Number items in list:
-def number_items(list):
-    index = 1
+def number_items(list, index=1):
     for item in list:
         print(index, item)
         index += 1
@@ -37,3 +36,32 @@ def delete(item="", list=[]):
     )
     z = int(input())
     return "" if z == 0 else list.remove(list[z - 1])
+
+
+# Add new order
+def new_order(list):
+    global new_order
+    order = {
+        "customer_name": "",
+        "customer_address": "",
+        "customer_phone": "",
+        "courier": "",
+        "status": "preparing",
+    }
+    print("Please provide the customer name, alternatively, please enter 0 to cancel")
+    name = input()
+    if name == "0":
+        return ""
+    else:
+        order.update({"customer_name": name})
+    print("Please provide the customer address.")
+    address = input()
+    order.update({"customer_address": address})
+    print("Please provide the customer phone number.")
+    phone_number = input()
+    order.update({"customer_phone": phone_number})
+    print("Please select the courier for this order.")
+    number_items(list)
+    courier = int(input())
+    order.update({"courier": list[courier - 1]})
+    return list.append(dict(order))
