@@ -64,4 +64,6 @@ def new_order(list):
     number_items(list)
     courier = int(input())
     order.update({"courier": list[courier - 1]})
+    print(order)
     return list.append(dict(order))
+    print(list.append(dict(order)))
