@@ -1,11 +1,19 @@
-from File_Functions import load_txt_data, save_txt_data, load_csv_data
-from List_Functions import number_items, create, update, delete, new_order
+from File_Functions import load_txt_data, save_txt_data, load_csv_data, save_csv_data
+from List_Functions import (
+    number_items,
+    create,
+    update,
+    delete,
+    new_order,
+    update_order_status,
+    update_order,
+    delete_order,
+)
 
 # Load products and couriers data
 products = load_txt_data("Products.txt")
 couriers = load_txt_data("Couriers.txt")
 orders = load_csv_data("Orders.csv")
-print(orders, type(orders))
 
 # Open main menu
 def main_menu():
@@ -21,9 +29,10 @@ def main_menu():
 
     if y == 0:
         print("\nThank you for using this app, goodbye")
-        return save_txt_data("Products.txt", products), save_txt_data(
-            "Couriers.txt", couriers
-        )
+        return (
+            save_txt_data("Products.txt", products),
+            save_txt_data("Couriers.txt", couriers),
+        ), save_csv_data("Orders.csv", orders)
 
     elif y == 1:
         print("\nThe current products are as follows:")
@@ -105,16 +114,16 @@ def orders_menu():
         return orders_menu()
 
     if y == 2:
-        return new_order(couriers), orders_menu()
+        return new_order(couriers, orders), orders_menu()
 
     if y == 3:
-        return orders_menu()
+        return update_order_status(orders), orders_menu()
 
     if y == 4:
-        return orders_menu()
+        return update_order(orders, couriers), orders_menu()
 
     if y == 5:
-        return orders_menu()
+        return delete_order(orders), orders_menu()
 
     else:
         print("\nPlease select a valid option ")

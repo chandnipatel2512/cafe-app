@@ -23,10 +23,21 @@ def save_txt_data(filename, list=[]):
 import csv
 
 
-def load_csv_data(filename: str):
+def load_csv_data(filename):
     with open(filename, mode="r") as csv_file:
         csv_read = csv.DictReader(csv_file)
         data = []
         for line in csv_read:
             data.append(line)
     return data
+
+
+# Save updated orders list to csv file
+def save_csv_data(filename, orders=[]):
+    with open(filename, "w", newline="") as output_file:
+        fc = csv.DictWriter(
+            output_file,
+            fieldnames=orders[0].keys(),
+        )
+        fc.writeheader()
+        fc.writerows(orders)
