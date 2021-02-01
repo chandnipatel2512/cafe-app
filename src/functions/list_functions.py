@@ -7,26 +7,29 @@ def number_items(list, index=1):
 
 
 # Create new item in list
-def create(item="", list=[]):
-    print(
-        f"\nPlease provide the name of the {item} you would like to add to the menu, alternatively, please enter 0 to cancel."
+def create(input, item="", list=[]):
+    new_item = input(
+        f"\nPlease provide the name of the {item} you would like to add to the menu, alternatively, please enter 0 to cancel.\n"
     )
-    new_item = input()
-    return "" if new_item == "0" else list.append(new_item)
+    if new_item == "0":
+        return ""
+    else:
+        list.append(new_item)
+        return list
 
 
 # Update item in list
-def update(item="", list=[]):
-    print(
-        f"\nPlease provide the number of the {item} you would like to update, alternatively, please enter 0 to cancel."
+def update(input, item="", list=[]):
+    number_items(list)
+    z = input(
+        f"\nPlease provide the number of the {item} you would like to update, alternatively, please enter 0 to cancel.\n"
     )
-    z = int(input())
-    if z == 0:
+    if z == "0":
         return ""
     else:
         print(f"\nPlease provide the updated {item} name.")
         updated_item = input()
-        list[z - 1] = updated_item
+        list[int(z) - 1] = updated_item
 
 
 # Delete item in list

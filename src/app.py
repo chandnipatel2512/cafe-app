@@ -1,5 +1,10 @@
-from File_Functions import load_txt_data, save_txt_data, load_csv_data, save_csv_data
-from List_Functions import (
+from .functions.file_functions import (
+    load_txt_data,
+    save_txt_data,
+    load_csv_data,
+    save_csv_data,
+)
+from .functions.list_functions import (
     number_items,
     create,
     update,
@@ -11,9 +16,9 @@ from List_Functions import (
 )
 
 # Load products and couriers data
-products = load_txt_data("Products.txt")
-couriers = load_txt_data("Couriers.txt")
-orders = load_csv_data("Orders.csv")
+products = load_txt_data("./data/products.txt")
+couriers = load_txt_data("./data/couriers.txt")
+orders = load_csv_data("./data/orders.csv")
 
 # Open main menu
 def main_menu():
@@ -30,9 +35,9 @@ def main_menu():
     if y == 0:
         print("\nThank you for using this app, goodbye")
         return (
-            save_txt_data("Products.txt", products),
-            save_txt_data("Couriers.txt", couriers),
-        ), save_csv_data("Orders.csv", orders)
+            save_txt_data("./data/products.txt", products),
+            save_txt_data("./data/couriers.txt", couriers),
+        ), save_csv_data("./data/orders.csv", orders)
 
     elif y == 1:
         print("\nThe current products are as follows:")
@@ -74,11 +79,10 @@ def operations_menu(item="", list=[]):
         return operations_menu(item, list)
 
     elif y == 2:
-        return create(item, list), operations_menu(item, list)
+        return create(input, item, list), operations_menu(item, list)
 
     elif y == 3:
-        number_items(list)
-        return update(item, list), operations_menu(item, list)
+        return update(input, item, list), operations_menu(item, list)
 
     elif y == 4:
         number_items(list)
