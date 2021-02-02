@@ -7,7 +7,7 @@ def number_items(list, index=1):
 
 
 # Create new item in list
-def create(input, item="", list=[]):
+def create(item="", list=[], input=input):
     new_item = input(
         f"\nPlease provide the name of the {item} you would like to add to the menu, alternatively, please enter 0 to cancel.\n"
     )
@@ -19,21 +19,19 @@ def create(input, item="", list=[]):
 
 
 # Update item in list
-def update(input, item="", list=[]):
+def update(item="", list=[], input=input):
     number_items(list)
     z = input(
         f"\nPlease provide the number of the {item} you would like to update, alternatively, please enter 0 to cancel.\n"
     )
-    if z == "0":
-        return ""
-    else:
-        print(f"\nPlease provide the updated {item} name.")
-        updated_item = input()
+    if z != "0":
+        updated_item = input(f"\nPlease provide the updated {item} name.")
         list[int(z) - 1] = updated_item
+    return list
 
 
 # Delete item in list
-def delete(item="", list=[]):
+def delete(item="", list=[], input=input):
     print(
         f"\nPlease provide the number of the {item} you would like to delete, alternatively, please enter 0 to cancel."
     )
@@ -42,7 +40,7 @@ def delete(item="", list=[]):
 
 
 # Add new order
-def new_order(couriers=[], orders=[]):
+def new_order(couriers=[], orders=[], input=input):
     print("Please provide the customer name, alternatively, please enter 0 to cancel.")
     name = input()
     if name == "0":
@@ -65,7 +63,7 @@ def new_order(couriers=[], orders=[]):
 
 
 # Update order status
-def update_order_status(orders=[]):
+def update_order_status(orders=[], input=input):
     print(
         "Please provide the order number for which you would like to update the status, alternatively, please enter 0 to cancel."
     )
@@ -81,7 +79,7 @@ def update_order_status(orders=[]):
 
 
 # Update order
-def update_order(orders=[], couriers=[]):
+def update_order(orders=[], couriers=[], input=input):
     print(
         "Please provide the order number you would like to update, alternatively, please enter 0 to cancel."
     )
@@ -118,7 +116,7 @@ def update_order(orders=[], couriers=[]):
 
 
 # Delete order
-def delete_order(orders=[]):
+def delete_order(orders=[], input=input):
     print(
         "Please provide the order number you would like to delete, alternatively, please enter 0 to cancel."
     )

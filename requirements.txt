@@ -1,0 +1,3 @@
+pymysql[rsa]
+python-dotenv
+black

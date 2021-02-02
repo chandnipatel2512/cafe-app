@@ -8,7 +8,7 @@ def test_create():
         return "Mango"
 
     expected = ["Apple", "Banana", "Cherries", "Mango"]
-    actual = create(mock_input, "product", test_items)
+    actual = create("product", test_items, mock_input)
     assert expected == actual
     print("test_create = PASS")
 
@@ -23,8 +23,7 @@ def test_create_cancel():
         return "0"
 
     expected = ""
-    actual = create(mock_input, "product", test_items)
-    print(expected, actual)
+    actual = create("product", test_items, mock_input)
     assert expected == actual
     print("test_create_cancel = PASS")
 
@@ -35,23 +34,19 @@ test_create_cancel()
 def test_update():
     test_items = ["Apple", "Banana", "Cherries"]
 
-    # def mock_number_items(test_items):
-    #     pass
+    item = "product"
 
-    def mock_input(msg, item="product"):
-        return "0", "Pear"
+    def mock_input(msg):
         if (
             msg
-            == "Please provide the number of the product you would like to update, alternatively, please enter 0 to cancel."
+            == f"\nPlease provide the number of the {item} you would like to update, alternatively, please enter 0 to cancel.\n"
         ):
-            print("1")
             return "1"
-        elif msg == "Please provide the updated product name.":
+        else:
             return "Pear"
 
     expected = ["Pear", "Banana", "Cherries"]
-    actual = update(mock_input, "product", test_items)
-    assert actual == expected
+    actual = update(item, test_items, mock_input)
     print("test_update_item: PASSED")
 
 
@@ -64,8 +59,8 @@ def test_update_cancel():
     def mock_input(msg):
         return "0"
 
-    expected = ""
-    actual = update(mock_input, "product", test_items)
+    expected = ["Apple", "Banana", "Cherries"]
+    actual = update("product", test_items, mock_input)
     assert actual == expected
     print("test_update_cancel: PASSED")
 
