@@ -1,4 +1,5 @@
 from src.functions.list_functions import number_items, create, update, delete
+from unittest.mock import Mock
 
 # Test create function to ensure it adds items to specified list
 def test_create():
@@ -10,10 +11,7 @@ def test_create():
     expected = ["Apple", "Banana", "Cherries", "Mango"]
     actual = create("product", test_items, mock_input)
     assert expected == actual
-    print("test_create = PASS")
 
-
-test_create()
 
 # Test create function to ensure it cancels and returns "" when user want to cancel and return to operations menu
 def test_create_cancel():
@@ -22,15 +20,12 @@ def test_create_cancel():
     def mock_input(msg):
         return "0"
 
-    expected = ""
+    expected = ["Apple", "Banana", "Cherries"]
     actual = create("product", test_items, mock_input)
     assert expected == actual
-    print("test_create_cancel = PASS")
 
 
-test_create_cancel()
-
-# Test update function to ensure it returns "" when user want to cancel and return to operations menu
+# Test update function to ensure it returns updated list when user want to cancel and return to operations menu
 def test_update():
     test_items = ["Apple", "Banana", "Cherries"]
 
@@ -47,12 +42,9 @@ def test_update():
 
     expected = ["Pear", "Banana", "Cherries"]
     actual = update(item, test_items, mock_input)
-    print("test_update_item: PASSED")
 
 
-test_update()
-
-# Test update function to ensure it returns "" when user want to cancel and return to operations menu
+# Test update function to ensure it returns unedited list when user want to cancel and return to operations menu
 def test_update_cancel():
     test_items = ["Apple", "Banana", "Cherries"]
 
@@ -62,7 +54,3 @@ def test_update_cancel():
     expected = ["Apple", "Banana", "Cherries"]
     actual = update("product", test_items, mock_input)
     assert actual == expected
-    print("test_update_cancel: PASSED")
-
-
-test_update_cancel()

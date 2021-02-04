@@ -1,24 +1,3 @@
-# Load txt file
-def load_txt_data(filename):
-    try:
-        file = open(filename)
-    except:
-        print("This file does not exist, please enter a valid file name.")
-    global list1
-    list1 = file.readlines()
-    file.close()
-    list1 = list(map(str.strip, list1))
-    return list1
-
-
-# Save updated txt files
-def save_txt_data(filename, list=[]):
-    updated_items = "\n".join(str(x) for x in list)
-    file = open(filename, "w+")
-    file.write(updated_items)
-    file.close()
-
-
 # Open csv file
 import csv
 
@@ -29,7 +8,14 @@ def load_csv_data(filename):
         data = []
         for line in csv_read:
             data.append(line)
-    return data
+    return data  #
+
+
+def load_data():
+    products = load_csv_data("./data/products.csv")
+    couriers = load_csv_data("./data/couriers.csv")
+    orders = load_csv_data("./data/orders.csv")
+    return products, couriers, orders
 
 
 # Save updated orders list to csv file
@@ -41,3 +27,9 @@ def save_csv_data(filename, orders=[]):
         )
         fc.writeheader()
         fc.writerows(orders)
+
+
+def save_data(products=[], couriers=[], orders=[]):
+    save_csv_data("./data/products.csv", products),
+    save_csv_data("./data/couriers.csv", couriers),
+    save_csv_data("./data/orders.csv", orders)

@@ -3,7 +3,7 @@ def number_items(list, index=1):
     for item in list:
         print(index, item)
         index += 1
-    return ""
+    return
 
 
 # Create new item in list
@@ -11,11 +11,9 @@ def create(item="", list=[], input=input):
     new_item = input(
         f"\nPlease provide the name of the {item} you would like to add to the menu, alternatively, please enter 0 to cancel.\n"
     )
-    if new_item == "0":
-        return ""
-    else:
+    if new_item != "0":
         list.append(new_item)
-        return list
+    return list
 
 
 # Update item in list
@@ -32,26 +30,23 @@ def update(item="", list=[], input=input):
 
 # Delete item in list
 def delete(item="", list=[], input=input):
-    print(
+    z = input(
         f"\nPlease provide the number of the {item} you would like to delete, alternatively, please enter 0 to cancel."
     )
-    z = int(input())
-    return "" if z == 0 else list.remove(list[z - 1])
+    return "" if z == "0" else list.remove(list[int(z) - 1])
 
 
 # Add new order
 def new_order(couriers=[], orders=[], input=input):
-    print("Please provide the customer name, alternatively, please enter 0 to cancel.")
-    name = input()
+    name = input(
+        "Please provide the customer name, alternatively, please enter 0 to cancel."
+    )
     if name == "0":
-        return ""
-    print("Please provide the customer address.")
-    address = input()
-    print("Please provide the customer phone number.")
-    phone_number = input()
-    print("Please select the courier for this order.")
+        return
+    address = input("Please provide the customer address.")
+    phone_number = input("Please provide the customer phone number.")
     number_items(couriers)
-    courier = couriers[int(input()) - 1]
+    courier = couriers[int(input("Please select the courier for this order.") - 1)]
     order = {
         "customer_name": name,
         "customer_address": address,
@@ -64,64 +59,62 @@ def new_order(couriers=[], orders=[], input=input):
 
 # Update order status
 def update_order_status(orders=[], input=input):
-    print(
-        "Please provide the order number for which you would like to update the status, alternatively, please enter 0 to cancel."
-    )
     number_items(orders)
-    number = int(input())
+    number = int(
+        input(
+            "Please provide the order number for which you would like to update the status, alternatively, please enter 0 to cancel."
+        )
+    )
     if number == 0:
         return ""
     else:
-        print("Please provide the latest order status.")
-        updated_status = input()
+        updated_status = input("Please provide the latest order status.")
         orders[number - 1]["status"] = updated_status
-    print(orders)
+    return orders
 
 
 # Update order
 def update_order(orders=[], couriers=[], input=input):
-    print(
-        "Please provide the order number you would like to update, alternatively, please enter 0 to cancel."
-    )
     number_items(orders)
-    number = int(input())
+    number = int(
+        input(
+            "Please provide the order number you would like to update, alternatively, please enter 0 to cancel."
+        )
+    )
     if number == 0:
         return ""
     else:
-        print("What would you like to update?")
         keys = orders[0].keys()
         number_items(keys)
-        option = int(input())
+        option = int(input("What would you like to update?"))
         if option == 1:
-            print("Please provide the updated customer name.")
-            name = input()
+            name = input("Please provide the updated customer name.")
             orders[number - 1]["customer_name"] = name
         if option == 2:
-            print("Please provide the updated customer address.")
-            address = input()
+            address = input("Please provide the updated customer address.")
             orders[number - 1]["customer_address"] = address
         if option == 3:
-            print("Please provide the updated contact number.")
-            phone = input()
+            phone = input("Please provide the updated contact number.")
             orders[number - 1]["customer_phone"] = phone
         if option == 4:
-            print("Please select the new courier for this order.")
             number_items(couriers)
-            courier = couriers[int(input()) - 1]
+            courier = couriers[
+                int(input("Please select the new courier for this order.")) - 1
+            ]
             orders[number - 1]["courier"] = courier
         if option == 5:
-            print("Please provide the latest order status.")
-            updated_status = input()
+            updated_status = input("Please provide the latest order status.")
             orders[number - 1]["status"] = updated_status
 
 
 # Delete order
 def delete_order(orders=[], input=input):
-    print(
-        "Please provide the order number you would like to delete, alternatively, please enter 0 to cancel."
-    )
     number_items(orders)
-    number = int(input())
+    number = int(
+        input(
+            "Please provide the order number you would like to delete, alternatively, please enter 0 to cancel."
+        )
+    )
     if number == 0:
         return ""
     else:
