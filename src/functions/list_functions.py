@@ -1,30 +1,72 @@
+from .file_functions import load_data, save_data
+
 # Number items in list:
 def number_items(list, index=1):
     for item in list:
         print(index, item)
         index += 1
-    return
+    return ""
 
 
 # Create new item in list
-def create(item="", list=[], input=input):
+def create(item="", detail="", list=[], input=input):
     new_item = input(
         f"\nPlease provide the name of the {item} you would like to add to the menu, alternatively, please enter 0 to cancel.\n"
     )
     if new_item != "0":
-        list.append(new_item)
+        if detail == "price":
+            while True:
+                try:
+                    item_detail = float(
+                        input(f"\nPlease provide the price of the product.\n")
+                    )
+                except ValueError:
+                    print("\nPlease enter a valid price.")
+                    continue
+                else:
+                    break
+        else:
+            item_detail = input(
+                f"\nPlease provide the contact number of the courier.\n"
+            )
+        list.append(dict({"name": new_item, detail: item_detail}))
     return list
 
 
 # Update item in list
-def update(item="", list=[], input=input):
+def update(item="", detail="", list=[], input=input):
     number_items(list)
-    z = input(
-        f"\nPlease provide the number of the {item} you would like to update, alternatively, please enter 0 to cancel.\n"
-    )
-    if z != "0":
-        updated_item = input(f"\nPlease provide the updated {item} name.")
-        list[int(z) - 1] = updated_item
+    while True:
+        try:
+            item_number = int(
+                input(
+                    f"\nPlease provide the number of the {item} you would like to update, alternatively, please enter 0 to cancel.\n"
+                )
+            )
+            list_item = list[item_number - 1]
+        except (ValueError, IndexError):
+            print("\nPlease enter a valid number.")
+        else:
+            break
+    if item_number != 0:
+        updated_name = input(f"\nPlease provide the updated {item} name.\n")
+        if detail == "price":
+            while True:
+                try:
+                    item_detail = float(
+                        input(f"\nPlease provide the updated product price.\n")
+                    )
+                except ValueError:
+                    print("\nPlease enter a valid price.")
+                    continue
+                else:
+                    break
+        else:
+            item_detail = input(
+                f"\nPlease provide the updated contact number of the courier.\n"
+            )
+    list[item_number - 1]["name"] = updated_name
+    list[item_number - 1][detail] = item_detail
     return list
 
 

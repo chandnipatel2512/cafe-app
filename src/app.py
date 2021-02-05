@@ -12,7 +12,6 @@ from .functions.list_functions import (
 
 # Load data
 products, couriers, orders = load_data()
-print(products)
 
 # Open main menu
 def main_menu():
@@ -31,10 +30,10 @@ def main_menu():
         return save_data(products, couriers, orders)
 
     elif y == 1:
-        return operations_menu("product", products)
+        return operations_menu("product", "price", products)
 
     elif y == 2:
-        return operations_menu("courier", couriers)
+        return operations_menu("courier", "phone", couriers)
 
     elif y == 3:
         return orders_menu()
@@ -45,7 +44,7 @@ def main_menu():
 
 
 # View operations menu
-def operations_menu(item="", list=[]):
+def operations_menu(item="", detail="", list=[]):
     options = [
         "Return to main menu",
         f"Show {item}s",
@@ -63,17 +62,17 @@ def operations_menu(item="", list=[]):
 
     elif y == 1:
         number_items(list)
-        return operations_menu(item, list)
+        return operations_menu(item, detail, list)
 
     elif y == 2:
-        return create(input, item, list), operations_menu(item, list)
+        return create(item, detail, list), operations_menu(item, detail, list)
 
     elif y == 3:
-        return update(input, item, list), operations_menu(item, list)
+        return update(item, detail, list), operations_menu(item, detail, list)
 
     elif y == 4:
         number_items(list)
-        return delete(item, list), operations_menu(item, list)
+        return delete(item, list), operations_menu(item, detail, list)
 
     elif y == 5:
         return operations_menu(item, list)
