@@ -10,6 +10,7 @@ def number_items(list, index=1):
 
 # Create new item in list
 def create(item="", detail="", list=[], input=input):
+
     new_item = input(
         f"\nPlease provide the name of the {item} you would like to add to the menu, alternatively, please enter 0 to cancel.\n"
     )
