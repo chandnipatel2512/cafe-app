@@ -6,3 +6,4 @@ src/superceded/
 .env
 src/persistence
 src/scratchpad.py
+docker-compose.yml
