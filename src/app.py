@@ -1,3 +1,4 @@
+from src.db.core import connection, get_data
 from .functions.file_functions import load_data, save_data
 from .functions.list_functions import (
     number_items,
@@ -10,6 +11,13 @@ from .functions.list_functions import (
     delete_order,
 )
 
+
+select_all_products = "SELECT * FROM product"
+select_all_couriers = "SELECT * FROM courier"
+
+products = get_data("product")
+
+print(products)
 # Load data
 products, couriers, orders = load_data()
 
