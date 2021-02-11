@@ -16,6 +16,8 @@ select_all_products = "SELECT * FROM product"
 select_all_couriers = "SELECT * FROM courier"
 
 products = get_data("product")
+couriers = get_data("courier")
+
 
 print(products)
 # Load data
