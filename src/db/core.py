@@ -32,8 +32,8 @@ def get_data(table_name, conn=connection()):
     return result
 
 
-def update(table_name, column1, column2, conn=connection()):
-    with conn.cursor() as cursor:
-        sql = f"INSERT INTO {table_name}({column1}, {column2})
-        cursor.execute(sql, values)
-    return conn.commit()
+# def update(table_name, column1, column2, conn=connection()):
+#     with conn.cursor() as cursor:
+#         sql = f"INSERT INTO {table_name}({column1}, {column2})
+#         cursor.execute(sql, values)
+#     return conn.commit()
