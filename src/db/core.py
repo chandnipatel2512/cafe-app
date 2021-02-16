@@ -24,16 +24,21 @@ def connection():
     )
 
 
-def get_data(table_name, conn=connection()):
-    with conn.cursor() as cursor:
-        sql = f"SELECT * FROM {table_name}"
-        cursor.execute(sql)
-        result = cursor.fetchall()
-    return result
+def get_data(sql, conn=connection()):
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            result = cursor.fetchall()
+        return result
+    except Exception as e:
+        input(f"ERROR: {e}")
 
 
-# def update(table_name, column1, column2, conn=connection()):
-#     with conn.cursor() as cursor:
-#         sql = f"INSERT INTO {table_name}({column1}, {column2})
-#         cursor.execute(sql, values)
-#     return conn.commit()
+def update(values, sql, conn=connection(), should_commit=True):
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(sql, dict(values))
+            if should_commit:
+                conn.commit()
+    except Exception as e:
+        input(f"ERROR: {e}")
