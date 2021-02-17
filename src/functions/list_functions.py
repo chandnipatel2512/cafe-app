@@ -111,10 +111,10 @@ def select_item(external_list=[]):
 
 
 # Function for selecting an item from the product list with cancellation option
-def select_product(external_list=[]):
-    options = print_list(external_list)
-    uuid = list_values(external_list, "id")
-    product_name = list_values(external_list, "name")
+def select_product(product_list=[]):
+    options = print_list(product_list)
+    uuid = list_values(product_list, "id")
+    product_name = list_values(product_list, "name")
     while True:
         try:
             user_input = int(
@@ -122,7 +122,7 @@ def select_product(external_list=[]):
                     f"\nPlease enter the number of the product you would like to add to this order, enter 0 once complete.\n"
                 )
             )
-            list_item = external_list[user_input - 1]
+            list_item = product_list[user_input - 1]
             if user_input == 0:
                 return 0, 0
             elif not user_input or user_input < 0:
@@ -132,6 +132,7 @@ def select_product(external_list=[]):
         else:
             break
     return uuid[user_input - 1], product_name[user_input - 1]
+
 
 
 # Function for order status

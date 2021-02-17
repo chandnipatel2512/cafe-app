@@ -13,3 +13,4 @@ basket = sql_get("basket")
 
 # Run app
 main_menu()
+

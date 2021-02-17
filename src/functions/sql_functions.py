@@ -19,5 +19,10 @@ def sql_update(table_name="", mydict={}):
     columns = ", ".join(mydict.keys())
     values = ", ".join("'" + str(x).replace("/", "_") + "'" for x in mydict.values())
     sql_query = "REPLACE INTO %s ( %s ) VALUES ( %s )" % (table_name, columns, values)
-    print(sql_query)
+    return sql_query
+
+
+# Query to delete data in the database
+def sql_delete(table_name="", id=""):
+    sql_query = "DELETE FROM %s WHERE id = %s" % (table_name, id)
     return sql_query
