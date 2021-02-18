@@ -25,9 +25,13 @@ def key_names(list_name=[]):
     return list(list_name[0].keys())
 
 
-# List value types:
-def value_types(list_name=[]):
-    return [type(v) for v in list_name[0].values()]
+# Product list of all data in list_name with specific id
+def list_for_id(id="", key_name="", list_name=[]):
+    list = []
+    for item in list_name:
+        if id in item.values():
+            list.append(item)
+    return list
 
 
 # List of all values in list of dictionaries for specific key
@@ -132,7 +136,6 @@ def select_product(product_list=[]):
         else:
             break
     return uuid[user_input - 1], product_name[user_input - 1]
-
 
 
 # Function for order status

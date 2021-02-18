@@ -24,5 +24,5 @@ def sql_update(table_name="", mydict={}):
 
 # Query to delete data in the database
 def sql_delete(table_name="", id=""):
-    sql_query = "DELETE FROM %s WHERE id = %s" % (table_name, id)
+    sql_query = "DELETE FROM %s WHERE id = '%s'" % (table_name, id)
     return sql_query

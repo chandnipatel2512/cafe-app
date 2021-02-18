@@ -25,7 +25,7 @@ CREATE TABLE transaction(
 
 -- Basket table
 CREATE TABLE basket(
-    id VARCHAR(255) NOT NULL,
+    id VARCHAR(255) NOT NULL PRIMARY KEY,
     transaction_id VARCHAR(255) NOT NULL,
     product_id VARCHAR(255) NOT NULL,
     product_name VARCHAR(255) NOT NULL,
