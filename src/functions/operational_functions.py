@@ -1,126 +1,126 @@
-from src.db.core import connection, get_data, update
+from src.db.core import *
 from src.functions.list_functions import *
 from src.functions.sql_functions import *
 import uuid
 
 # Create new product and save to database
-def create_product(list_name=[]):
+def create_product(product_list=[]):
     new_product = {}
     new_product["id"] = uuid_generator()
-    user_input = string_with_cancel(list_name, "name", "name")
-    if user_input != "0":
+    user_input = string_with_cancel(product_list, "name", "name")
+    if user_input != "":
         new_product["name"] = user_input
-        new_product["price"] = float_input(list_name, "price")
+        new_product["price"] = float_input(product_list, "price")
         sql = sql_add("product", new_product)
         update(new_product, sql)
-        list_name.append(new_product)
-    return list_name
+        product_list.append(new_product)
+    return product_list
 
 
 # Update a product and save to database
-def update_product(list_name=[]):
-    print_list(list_name)
+def update_product(product_list=[]):
+    print_list(product_list)
     index = int(
         input(
             "Please enter the number of the product you would like to update, alternatively, enter 0 to cancel.\n"
         )
     )
     if index != 0:
-        updated_product = list_name[index - 1]
+        updated_product = product_list[index - 1]
         user_input = input(
-            "\nName: Please enter any key to update the name, or press enter to continue.\n"
+            "\nName: Enter any key to update, or press enter to continue.\n"
         )
         if user_input != "":
-            updated_product["name"] = list_name[index - 1]["name"] = string_input(
-                list_name, "name", "name"
+            updated_product["name"] = product_list[index - 1]["name"] = string_input(
+                product_list, "name", "name"
             )
         user_input = input(
-            "\nPrice: Please enter any key to update the price, or press enter to continue.\n"
+            "\nPrice: Enter any key to update, or press enter to continue.\n"
         )
         if user_input != "":
-            updated_product["price"] = list_name[index - 1]["price"] = float_input(
-                list_name, "price"
+            updated_product["price"] = product_list[index - 1]["price"] = float_input(
+                product_list, "price"
             )
         sql = sql_update("product", updated_product)
         update(updated_product, sql)
-    return list_name
+    return product_list
 
 
 # Delete a product and update database
-def delete_product(list_name):
-    print_list(list_name)
+def delete_product(product_list):
+    print_list(product_list)
     index = int(
         input(
-            "Please enter the number of the product you would like to delete, alternatively, enter 0 to cancel.\n"
+            "\nPlease enter the number of the product you would like to delete, alternatively, enter 0 to cancel.\n"
         )
     )
-    deleted_product = list_name[index - 1]
-    id = list_name[index - 1]["id"]
+    deleted_product = product_list[index - 1]
+    id = product_list[index - 1]["id"]
     if index != 0:
-        del list_name[index - 1]
+        del product_list[index - 1]
         sql = sql_delete("product", id)
         update(deleted_product, sql)
-    return list_name
+    return product_list
 
 
 # Create new courier and save to database
-def create_courier(list_name=[]):
+def create_courier(courier_list=[]):
     new_courier = {}
     new_courier["id"] = uuid_generator()
-    user_input = string_with_cancel(list_name, "name", "name")
+    user_input = string_with_cancel(courier_list, "name", "name")
     if user_input != "0":
         new_courier["name"] = user_input
-        new_courier["phone"] = string_input(list_name, "phone", "phone number")
+        new_courier["phone"] = string_input(courier_list, "phone", "phone number")
         sql = sql_add("courier", new_courier)
         update(new_courier, sql)
-        list_name.append(new_courier)
-    return list_name
+        courier_list.append(new_courier)
+    return courier_list
 
 
 # Update a courier and save to database
-def update_courier(list_name=[]):
-    print_list(list_name)
+def update_courier(courier_list=[]):
+    print_list(courier_list)
     index = int(
         input(
             "Please enter the number of the courier you would like to update, alternatively, enter 0 to cancel.\n"
         )
     )
     if index != 0:
-        update_courier = list_name[index - 1]
+        update_courier = courier_list[index - 1]
         user_input = input(
-            "\nName: Please enter any key to update the name, or press enter to continue.\n"
+            "\nName: Enter any key to update, or press enter to continue.\n"
         )
         if user_input != "":
-            update_courier["name"] = list_name[index - 1]["name"] = string_input(
-                list_name, "name", "name"
+            update_courier["name"] = courier_list[index - 1]["name"] = string_input(
+                courier_list, "name", "name"
             )
         user_input = input(
-            "\nPhone number: Please enter any key to update the phone number, or press enter to continue.\n"
+            "\nPhone number: Enter any key to update, or press enter to continue.\n\n"
         )
         if user_input != "":
-            update_courier["phone"] = list_name[index - 1]["phone"] = string_input(
-                list_name, "phone"
+            update_courier["phone"] = courier_list[index - 1]["phone"] = string_input(
+                courier_list, "phone"
             )
         sql = sql_update("courier", update_courier)
         update(update_courier, sql)
-    return list_name
+    return courier_list
 
 
 # Delete a courier and update database
-def delete_courier(list_name):
-    print_list(list_name)
+def delete_courier(courier_list):
+    print_list(courier_list)
     index = int(
         input(
-            "Please enter the number of the courier you would like to delete, alternatively, enter 0 to cancel.\n"
+            "\nPlease enter the number of the courier you would like to delete, alternatively, enter 0 to cancel.\n"
         )
     )
-    deleted_courier = list_name[index - 1]
-    id = list_name[index - 1]["id"]
+    deleted_courier = courier_list[index - 1]
+    id = courier_list[index - 1]["id"]
     if index != 0:
-        del list_name[index - 1]
+        del courier_list[index - 1]
         sql = sql_delete("courier", id)
         update(deleted_courier, sql)
-    return list_name
+    return courier_list
 
 
 # Add products to basket and save to database
@@ -163,6 +163,24 @@ def create_order(order_list=[], courier_list=[], basket_list=[], product_list=[]
     return basket_list, order_list
 
 
+# Update order status and save to database
+def update_order_status(order_list=[]):
+    print_list(order_list)
+    index = int(
+        input(
+            "Please enter the order number of the status you would like to update, alternatively, enter 0 to cancel.\n"
+        )
+    )
+    if index != 0:
+        updated_order_status = order_list[index - 1]
+        updated_order_status["order_status"] = order_list[index - 1][
+            "order_status"
+        ] = order_status()
+        sql = sql_update("transaction", updated_order_status)
+        update(updated_order_status, sql)
+    return order_list
+
+
 # Update products in basket and save to database
 def update_basket(transaction_id="", basket_list=[], product_list=[]):
     user_input = "1"
@@ -171,9 +189,7 @@ def update_basket(transaction_id="", basket_list=[], product_list=[]):
         products = list_values(order_list, "product_name")
         number_items(products)
         index = int(
-            input(
-                "\nPlease select the number of the basket you would like to update.\n"
-            )
+            input("Please select the number of the basket you would like to update.\n")
         )
         user_input = input(
             "\nEnter 1 to update or 2 to delete, alternatively, enter anything else to cancel.\n"
@@ -245,3 +261,20 @@ def update_order(order_list=[], courier_list=[], basket_list=[], product_list=[]
     sql = sql_update("transaction", updated_order)
     update(updated_order, sql)
     return basket_list, order_list
+
+
+# Delete an order and update database
+def delete_order(order_list=[]):
+    print_list(order_list)
+    index = int(
+        input(
+            "Please enter the number of the order you would like to delete, alternatively, enter 0 to cancel.\n"
+        )
+    )
+    deleted_order = order_list[index - 1]
+    id = order_list[index - 1]["id"]
+    if index != 0:
+        del order_list[index - 1]
+        sql = sql_delete("transaction", id)
+        update(deleted_order, sql)
+    return order_list

@@ -8,11 +8,15 @@ def number_items(list, index=1):
     return ""
 
 
-# Print list without id number
-def print_list(list_name=[]):
-    list_without_id = [{k: v for k, v in d.items() if k != "id"} for d in list_name]
-    print(number_items(list_without_id))
-    return
+# Print list without id numbers
+def print_list(
+    list_name=[],
+    hidden_fields=["id", "courier_id", "transaction_id", "basket_id", "product_id"],
+):
+    list_without_id = [
+        {k: v for k, v in d.items() if k not in hidden_fields} for d in list_name
+    ]
+    print(tabulate(list_without_id, headers="keys", showindex=True))
 
 
 # Generate UUID
