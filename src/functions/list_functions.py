@@ -1,22 +1,17 @@
 import uuid
-
-# Number items in list:
-def number_items(list, index=1):
-    for item in list:
-        print(index, item)
-        index += 1
-    return ""
-
+from tabulate import tabulate
 
 # Print list without id numbers
 def print_list(
     list_name=[],
     hidden_fields=["id", "courier_id", "transaction_id", "basket_id", "product_id"],
 ):
+    print("\n")
     list_without_id = [
         {k: v for k, v in d.items() if k not in hidden_fields} for d in list_name
     ]
     print(tabulate(list_without_id, headers="keys", showindex=True))
+    print("\n")
 
 
 # Generate UUID
@@ -48,11 +43,9 @@ def string_with_cancel(list_name=[], key_name="", input_name=""):
     existing_items = list_values(list_name, key_name)
     while True:
         user_input = input(
-            f"\nPlease enter the {input_name}. Alternatively, enter 0 to cancel.\n"
+            f"\nPlease enter the {input_name}. Alternatively, press enter to cancel.\n"
         )
-        if not user_input:
-            print(f"\nPlease enter a valid {input_name}")
-        elif user_input in existing_items:
+        if user_input in existing_items:
             print(f"\nThis {input_name} already exists.")
         else:
             break
@@ -101,21 +94,21 @@ def float_input(list_name=[], input_name=""):
     return user_input
 
 
-# Function for selecting an item from a list - may change to just courier
-def select_item(external_list=[]):
-    options = print_list(external_list)
-    uuid = list_values(external_list, "id")
+# Function for selecting the courier
+def select_courier(courier_list=[]):
+    options = print_list(courier_list)
+    uuid = list_values(courier_list, "id")
     while True:
         try:
-            user_input = int(input(f"\nPlease select the relevant number.\n"))
-            list_item = external_list[user_input - 1]
-            if not user_input or user_input <= 0:
+            index = int(input(f"\nPlease select the courier number.\n"))
+            list_item = courier_list[index]
+            if index < 0:
                 raise ValueError
         except (ValueError, IndexError):
             print(f"\nInvalid input")
         else:
             break
-    return uuid[user_input - 1]
+    return uuid[index]
 
 
 # Function for selecting an item from the product list with cancellation option
@@ -144,16 +137,22 @@ def select_product(product_list=[]):
 
 # Function for order status
 def order_status():
-    status_options = ["Order placed", "Preparing", "Being delivered", "Delivered"]
-    number_items(status_options)
+    status_options = [
+        {"Status": "Order placed"},
+        {"Status": "Preparing"},
+        {"Status": "Being delivered"},
+        {"Status": "Delivered"},
+    ]
+    print_list(status_options)
     while True:
         try:
             user_input = int(input(f"\nPlease select the current order status.\n"))
-            current_status = status_options[user_input - 1]
-            if not user_input or user_input <= 0:
+            current_status = status_options[user_input]["Status"]
+            print(current_status)
+            if user_input < 0:
                 raise ValueError
         except (ValueError, IndexError):
             print(f"\nInvalid input")
         else:
             break
-    return status_options[user_input - 1]
+    return current_status
