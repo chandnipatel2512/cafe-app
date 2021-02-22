@@ -10,7 +10,7 @@ def print_list(
     list_without_id = [
         {k: v for k, v in d.items() if k not in hidden_fields} for d in list_name
     ]
-    print(tabulate(list_without_id, headers="keys", showindex=True))
+    print(tabulate(list_without_id, headers="keys", showindex=True, tablefmt="grid"))
     print("\n")
 
 
@@ -25,7 +25,7 @@ def key_names(list_name=[]):
 
 
 # Product list of all data in list_name with specific id
-def list_for_id(id="", key_name="", list_name=[]):
+def list_for_id(id="", list_name=[]):
     list = []
     for item in list_name:
         if id in item.values():
@@ -94,21 +94,25 @@ def float_input(list_name=[], input_name=""):
     return user_input
 
 
-# Function for selecting the courier
-def select_courier(courier_list=[]):
-    options = print_list(courier_list)
-    uuid = list_values(courier_list, "id")
+# Function for selecting an item from a list (used for orders and couriers)
+def select_item(item_list=[], item_name=""):
+    options = print_list(item_list)
+    uuid = list_values(item_list, "id")
+    try:
+        name = list_values(item_list, "name")
+    except:
+        name = uuid
     while True:
         try:
-            index = int(input(f"\nPlease select the courier number.\n"))
-            list_item = courier_list[index]
+            index = int(input(f"\nPlease select the number of the {item_name}.\n"))
+            list_item = item_list[index]
             if index < 0:
                 raise ValueError
-        except (ValueError, IndexError):
+        except (ValueError, IndexError, TypeError):
             print(f"\nInvalid input")
         else:
             break
-    return uuid[index]
+    return uuid[index], name[index]
 
 
 # Function for selecting an item from the product list with cancellation option
@@ -118,21 +122,20 @@ def select_product(product_list=[]):
     product_name = list_values(product_list, "name")
     while True:
         try:
-            user_input = int(
-                input(
-                    f"\nPlease enter the number of the product you would like to add to this order, enter 0 once complete.\n"
-                )
+            user_input = input(
+                f"\nPlease enter the number of the product you would like to add to this order, or press enter to return to the previous menu.\n"
             )
-            list_item = product_list[user_input - 1]
-            if user_input == 0:
-                return 0, 0
-            elif not user_input or user_input < 0:
+            if user_input == "":
+                return "0", "0"
+            user_input = int(user_input)
+            list_item = product_list[user_input]
+            if user_input < 0:
                 raise ValueError
         except (ValueError, IndexError):
             print(f"\nInvalid input")
         else:
             break
-    return uuid[user_input - 1], product_name[user_input - 1]
+    return uuid[user_input], product_name[user_input]
 
 
 # Function for order status
@@ -148,8 +151,7 @@ def order_status():
         try:
             user_input = int(input(f"\nPlease select the current order status.\n"))
             current_status = status_options[user_input]["Status"]
-            print(current_status)
-            if user_input < 0:
+            if not user_input or user_input < 0:
                 raise ValueError
         except (ValueError, IndexError):
             print(f"\nInvalid input")

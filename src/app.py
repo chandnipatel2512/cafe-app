@@ -11,19 +11,19 @@ def main_menu():
         {"Option": "Show orders menu"},
     ]
     print_list(options)
-    y = int(input("\nPlease select an option from the above menu.\n"))
+    y = input("\nPlease select an option from the above menu.\n")
 
-    if y == 0:
+    if y == "0":
         print("\nThank you for using this app, goodbye")
         os.system("clear")
 
-    elif y == 1:
+    elif y == "1":
         return os.system("clear"), product_menu(product)
 
-    elif y == 2:
+    elif y == "2":
         return os.system("clear"), courier_menu(courier)
 
-    elif y == 3:
+    elif y == "3":
         return os.system("clear"), order_menu(order, courier, basket, product)
 
     else:
@@ -41,27 +41,27 @@ def product_menu(product_list=[]):
         {"Option": "Delete product"},
     ]
     print_list(options)
-    y = int(input("\nPlease select an option from the above menu.\n"))
+    y = input("\nPlease select an option from the above menu.\n")
 
-    if y == 0:
+    if y == "0":
         return main_menu()
 
-    elif y == 1:
+    elif y == "1":
         os.system("clear")
         print_list(product_list)
         return product_menu(product_list)
 
-    elif y == 2:
+    elif y == "2":
         os.system("clear")
         product_list = create_product(product_list)
         return product_menu(product_list)
 
-    elif y == 3:
+    elif y == "3":
         os.system("clear")
         product_list = update_product(product_list)
         return product_menu(product_list)
 
-    elif y == 4:
+    elif y == "4":
         os.system("clear")
         product_list = delete_product(product_list)
         return product_menu(product_list)
@@ -81,27 +81,27 @@ def courier_menu(courier_list=[]):
         {"Option": "Delete courier"},
     ]
     print_list(options)
-    y = int(input("\nPlease select an option from the above menu.\n"))
+    y = input("\nPlease select an option from the above menu.\n")
 
-    if y == 0:
+    if y == "0":
         return main_menu()
 
-    elif y == 1:
+    elif y == "1":
         os.system("clear")
         print_list(courier_list)
         return courier_menu(courier_list)
 
-    elif y == 2:
+    elif y == "2":
         os.system("clear")
         courier_list = create_courier(courier_list)
         return courier_menu(courier_list)
 
-    elif y == 3:
+    elif y == "3":
         os.system("clear")
         courier_list = update_courier(courier_list)
         return courier_menu(courier_list)
 
-    elif y == 4:
+    elif y == "4":
         os.system("clear")
         courier_list = delete_courier(courier_list)
         return courier_menu(courier_list)
@@ -123,54 +123,49 @@ def order_menu(order_list=[], courier_list=[], basket_list=[], product_list=[]):
         {"Option": "Delete order"},
     ]
     print_list(options)
-    y = int(input("\nPlease select an option from the above menu.\n"))
+    y = input("\nPlease select an option from the above menu.\n")
 
-    if y == 0:
+    if y == "0":
         return main_menu()
 
-    if y == 1:
+    if y == "1":
         os.system("clear")
         print_list(order_list)
         return order_menu(order_list, courier_list, basket_list, product_list)
 
-    if y == 2:
+    if y == "2":
         os.system("clear")
         basket, order = create_order(
             order_list, courier_list, basket_list, product_list
         )
         return order_menu(order_list, courier_list, basket_list, product_list)
 
-    if y == 3:
+    if y == "3":
         os.system("clear")
         order = update_order_status(order_list)
         return order_menu(order_list, courier_list, basket_list, product_list)
 
-    if y == 4:
+    if y == "4":
         os.system("clear")
         basket, order = update_order(
             order_list, courier_list, basket_list, product_list
         )
         return order_menu(order_list, courier_list, basket_list, product_list)
 
-    if y == 5:
+    if y == "5":
         os.system("clear")
-        basket = update_basket(order_list)
-        return order_menu(
-            order_list=[], courier_list=[], basket_list=[], product_list=[]
-        )
+        transaction_id, unused = select_item(order_list, "order")
+        basket = update_basket(transaction_id, basket_list, product_list)
+        return order_menu(order_list, courier_list, basket_list, product_list)
 
-    if y == 6:
+    if y == "6":
         os.system("clear")
         order = delete_order(order_list)
-        return order_menu(
-            order_list=[], courier_list=[], basket_list=[], product_list=[]
-        )
+        return order_menu(order_list, courier_list, basket_list, product_list)
 
     else:
         print("\nPlease select a valid option ")
-        return order_menu(
-            order_list=[], courier_list=[], basket_list=[], product_list=[]
-        )
+        return order_menu(order_list, courier_list, basket_list, product_list)
 
 
 # Run app
