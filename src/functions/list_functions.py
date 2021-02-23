@@ -104,7 +104,12 @@ def select_item(item_list=[], item_name=""):
         name = uuid
     while True:
         try:
-            index = int(input(f"\nPlease select the number of the {item_name}.\n"))
+            index = input(
+                f"\nPlease select the number of the {item_name}. Alternatively, press enter to cancel.\n"
+            )
+            if index == "":
+                return 0, 0
+            index = int(index)
             list_item = item_list[index]
             if index < 0:
                 raise ValueError
@@ -149,9 +154,9 @@ def order_status():
     print_list(status_options)
     while True:
         try:
-            user_input = int(input(f"\nPlease select the current order status.\n"))
+            user_input = int(input("\nPlease select the current order status.\n"))
             current_status = status_options[user_input]["Status"]
-            if not user_input or user_input < 0:
+            if user_input == "" or user_input < 0:
                 raise ValueError
         except (ValueError, IndexError):
             print(f"\nInvalid input")

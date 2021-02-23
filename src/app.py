@@ -14,8 +14,8 @@ def main_menu():
     y = input("\nPlease select an option from the above menu.\n")
 
     if y == "0":
-        print("\nThank you for using this app, goodbye")
         os.system("clear")
+        print("\nThank you for using this app, goodbye")
 
     elif y == "1":
         return os.system("clear"), product_menu(product)
@@ -27,6 +27,7 @@ def main_menu():
         return os.system("clear"), order_menu(order, courier, basket, product)
 
     else:
+        os.system("clear")
         print("\nPlease select a valid option ")
         return main_menu()
 
@@ -67,6 +68,7 @@ def product_menu(product_list=[]):
         return product_menu(product_list)
 
     else:
+        os.system("clear")
         print("\nPlease select a valid option ")
         return product_menu(product_list)
 
@@ -107,6 +109,7 @@ def courier_menu(courier_list=[]):
         return courier_menu(courier_list)
 
     else:
+        os.system("clear")
         print("\nPlease select a valid option ")
         return courier_menu(courier_list)
 
@@ -164,6 +167,7 @@ def order_menu(order_list=[], courier_list=[], basket_list=[], product_list=[]):
         return order_menu(order_list, courier_list, basket_list, product_list)
 
     else:
+        os.system("clear")
         print("\nPlease select a valid option ")
         return order_menu(order_list, courier_list, basket_list, product_list)
 
