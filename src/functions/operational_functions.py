@@ -10,9 +10,9 @@ def create_product(product_list=[]):
     user_input = string_with_cancel(product_list, "name", "name")
     if user_input != "":
         new_product["name"] = user_input
-        new_product["price"] = float_input(product_list, "price")
-        sql = sql_add("product", new_product)
-        update(new_product, sql)
+        new_product["price"] = float_input("price")
+        sql = sql_add("product", new_product)  # Create sql query
+        update(new_product, sql)  # Update sql database
         product_list.append(new_product)
     os.system("clear")
     return product_list
@@ -38,10 +38,10 @@ def update_product(product_list=[]):
         )
         if user_input != "":
             updated_product["price"] = product_list[index]["price"] = float_input(
-                product_list, "price"
+                "price"
             )
-        sql = sql_update("product", updated_product)
-        update(updated_product, sql)
+        sql = sql_update("product", updated_product)  # Create sql query
+        update(updated_product, sql)  # Update sql database
         os.system("clear")
     return product_list
 
@@ -57,8 +57,8 @@ def delete_product(product_list):
         id = product_list[index]["id"]
         if index != "":
             del product_list[index]
-            sql = sql_delete("product", id)
-            update(deleted_product, sql)
+            sql = sql_delete("product", id)  # Create sql query
+            update(deleted_product, sql)  # Update sql database
         os.system("clear")
     return product_list
 
@@ -71,8 +71,8 @@ def create_courier(courier_list=[]):
     if user_input != "":
         new_courier["name"] = user_input
         new_courier["phone"] = string_input(courier_list, "phone", "phone number")
-        sql = sql_add("courier", new_courier)
-        update(new_courier, sql)
+        sql = sql_add("courier", new_courier)  # Create sql query
+        update(new_courier, sql)  # Update sql database
         courier_list.append(new_courier)
     os.system("clear")
     return courier_list
@@ -100,8 +100,8 @@ def update_courier(courier_list=[]):
             update_courier["phone"] = courier_list[index]["phone"] = string_input(
                 courier_list, "phone"
             )
-        sql = sql_update("courier", update_courier)
-        update(update_courier, sql)
+        sql = sql_update("courier", update_courier)  # Create sql query
+        update(update_courier, sql)  # Update sql database
         os.system("clear")
     return courier_list
 
@@ -117,8 +117,8 @@ def delete_courier(courier_list):
         id = courier_list[index]["id"]
         if index != 0:
             del courier_list[index]
-            sql = sql_delete("courier", id)
-            update(deleted_courier, sql)
+            sql = sql_delete("courier", id)  # Create sql query
+            update(deleted_courier, sql)  # Update sql database
         os.system("clear")
     return courier_list
 
@@ -133,8 +133,8 @@ def create_basket(transaction_id="", basket_list=[], product_list=[]):
         new_basket["id"] = uuid_generator()
         new_basket["product_id"] = product_id
         new_basket["product_name"] = product_name
-        sql = sql_add("basket", new_basket)
-        update(new_basket, sql)
+        sql = sql_add("basket", new_basket)  # Create sql query
+        update(new_basket, sql)  # Update sql database
         basket_list.append(new_basket.copy())
         product_id, product_name = select_product(product_list)
     os.system("clear")
@@ -159,8 +159,8 @@ def create_order(order_list=[], courier_list=[], basket_list=[], product_list=[]
         new_transaction["courier_id"] = courier_id
         new_transaction["courier_name"] = courier_name
         new_transaction["order_status"] = order_status()
-        sql = sql_add("transaction", new_transaction)
-        update(new_transaction, sql)
+        sql = sql_add("transaction", new_transaction)  # Create sql query
+        update(new_transaction, sql)  # Update sql database
         order_list.append(new_transaction)
         basket_list = create_basket(id, basket_list, product_list)
     os.system("clear")
@@ -178,8 +178,8 @@ def update_order_status(order_list=[]):
         updated_order_status["order_status"] = order_list[index][
             "order_status"
         ] = order_status()
-        sql = sql_update("transaction", updated_order_status)
-        update(updated_order_status, sql)
+        sql = sql_update("transaction", updated_order_status)  # Create sql query
+        update(updated_order_status, sql)  # Update sql database
         os.system("clear")
     return order_list
 
@@ -223,8 +223,8 @@ def update_basket(transaction_id="", basket_list=[], product_list=[]):
                     selected_basket["product_name"] = basket_list[basket_list_index][
                         "product_name"
                     ] = product_name
-                    sql = sql_update("basket", selected_basket)
-                    update(selected_basket, sql)
+                    sql = sql_update("basket", selected_basket)  # Create sql query
+                    update(selected_basket, sql)  # Update sql database
 
         elif user_input == "3":
             if order_list == []:
@@ -238,8 +238,8 @@ def update_basket(transaction_id="", basket_list=[], product_list=[]):
                 )
                 selected_basket = basket_list[basket_list_index]
                 del basket_list[basket_list_index]
-                sql = sql_delete("basket", id)
-                update(selected_basket, sql)
+                sql = sql_delete("basket", id)  # Create sql query
+                update(selected_basket, sql)  # Update sql database
     os.system("clear")
     return basket_list
 
@@ -282,8 +282,8 @@ def update_order(order_list=[], courier_list=[], basket_list=[], product_list=[]
             updated_order["courier_name"] = order_list[index][
                 "courier_name"
             ] = courier_name
-        sql = sql_update("transaction", updated_order)
-        update(updated_order, sql)
+        sql = sql_update("transaction", updated_order)  # Create sql query
+        update(updated_order, sql)  # Update sql database
         user_input = input(
             "\nOrdered items: Enter any key to update, or press enter to continue.\n"
         )
@@ -304,7 +304,7 @@ def delete_order(order_list=[]):
         deleted_order = order_list[index]
         id = order_list[index]["id"]
         del order_list[index]
-        sql = sql_delete("transaction", id)
-        update(deleted_order, sql)
+        sql = sql_delete("transaction", id)  # Create sql query
+        update(deleted_order, sql)  # Update sql database
     os.system("clear")
     return order_list

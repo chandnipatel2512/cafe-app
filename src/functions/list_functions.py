@@ -9,7 +9,7 @@ def print_list(
     print("\n")
     list_without_id = [
         {k: v for k, v in d.items() if k not in hidden_fields} for d in list_name
-    ]
+    ]  # Creates new list without id fields
     print(tabulate(list_without_id, headers="keys", showindex=True, tablefmt="grid"))
     print("\n")
 
@@ -67,7 +67,7 @@ def string_input(list_name=[], key_name="", input_name=""):
 
 
 # Function for an integer input
-def integer_input(list_name=[], input_name=""):
+def integer_input(input_name=""):
     while True:
         try:
             user_input = int(input(f"\nPlease enter the {input_name}.\n"))
@@ -81,7 +81,7 @@ def integer_input(list_name=[], input_name=""):
 
 
 # Function for a float input
-def float_input(list_name=[], input_name="", input=input):
+def float_input(input_name="", input=input):
     while True:
         try:
             user_input = float(input(f"\nPlease enter the {input_name}.\n"))
