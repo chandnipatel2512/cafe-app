@@ -81,7 +81,7 @@ def integer_input(input_name=""):
 
 
 # Function for a float input
-def float_input(input_name="", input=input):
+def float_input(input_name=""):
     while True:
         try:
             user_input = float(input(f"\nPlease enter the {input_name}.\n"))

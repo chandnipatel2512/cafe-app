@@ -34,6 +34,3 @@ class Testing(unittest.TestCase):
         actual = create_product(product_list)
         assert expected == actual
 
-
-if __name__ == "__main__":
-    unittest.main()
