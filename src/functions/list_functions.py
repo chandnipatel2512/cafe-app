@@ -98,8 +98,10 @@ def float_input(input_name=""):
 def select_item(item_list=[], item_name=""):
     options = print_list(item_list)
     uuid = list_values(item_list, "id")
+    print(uuid)
     try:
         name = list_values(item_list, "name")
+        print(name)
     except:
         name = uuid
     while True:
