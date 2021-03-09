@@ -97,10 +97,16 @@ class Testing(unittest.TestCase):
         actual = select_item(list, "name")
         assert expected == actual
 
-    # Test function for selecting order status when out of index options entered
+    # Test function for selecting order status when out of range index options are entered
     def test_order_status1(self):
         mock_input.side_effect = [-2.5, 10, 10000, 4, 2]
-
         expected = "Being delivered"
+        actual = order_status()
+        assert expected == actual
+
+    # Test function for selecting order status when user enters string input
+    def test_order_status2(self):
+        mock_input.side_effect = ["", "Test", 0]
+        expected = "Order placed"
         actual = order_status()
         assert expected == actual
