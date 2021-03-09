@@ -104,7 +104,7 @@ class Testing(unittest.TestCase):
         actual = order_status()
         assert expected == actual
 
-    # Test function for selecting order status when user enters string input
+    # Test function for selecting order status when user enters empty input or string input
     def test_order_status2(self):
         mock_input.side_effect = ["", "Test", 0]
         expected = "Order placed"
