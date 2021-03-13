@@ -19,7 +19,7 @@ class Testing(unittest.TestCase):
     )
     @patch("src.functions.operational_functions.float_input", float_input_mock)
     @patch("src.functions.operational_functions.update", update_mock)
-    def test_create_product(
+    def test_create_product1(
         self,
     ):
         product_list = []
@@ -34,3 +34,23 @@ class Testing(unittest.TestCase):
         actual = create_product(product_list)
         assert expected == actual
 
+    # Test create function to ensure it cancels if user enters empty input
+    @patch("src.functions.operational_functions.uuid_generator", uuid_generator_mock)
+    @patch(
+        "src.functions.operational_functions.string_with_cancel",
+        string_with_cancel_mock,
+    )
+    @patch("src.functions.operational_functions.update", update_mock)
+    def test_create_product2(
+        self,
+    ):
+        product_list = []
+        uuid_generator_mock.return_value = "0123"
+        string_with_cancel_mock.return_value = ""
+        update_mock = ""
+
+        test_product = []
+
+        expected = test_product
+        actual = create_product(product_list)
+        assert expected == actual
