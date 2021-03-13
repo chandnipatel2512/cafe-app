@@ -19,7 +19,7 @@ class Testing(unittest.TestCase):
     )
     @patch("src.functions.operational_functions.string_input", string_input_mock)
     @patch("src.functions.operational_functions.update", update_mock)
-    def test_create_courier(
+    def test_create_courier1(
         self,
     ):
         courier_list = []
@@ -32,5 +32,25 @@ class Testing(unittest.TestCase):
 
         expected = test_courier
         actual = create_courier(courier_list)
-        print(actual)
+        assert expected == actual
+
+    # Test create function to ensure it cancels if user enters empty input
+    @patch("src.functions.operational_functions.uuid_generator", uuid_generator_mock)
+    @patch(
+        "src.functions.operational_functions.string_with_cancel",
+        string_with_cancel_mock,
+    )
+    @patch("src.functions.operational_functions.update", update_mock)
+    def test_create_courier2(
+        self,
+    ):
+        courier_list = []
+        uuid_generator_mock.return_value = "0123"
+        string_with_cancel_mock.return_value = ""
+        update_mock = ""
+
+        test_courier = []
+
+        expected = test_courier
+        actual = create_courier(courier_list)
         assert expected == actual
