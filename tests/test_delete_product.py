@@ -28,3 +28,23 @@ class Testing(unittest.TestCase):
         expected = test_delete_product
         actual = delete_product(product_list)
         assert expected == actual
+
+    # Test delete product function to ensure it cancels when user inputs 0
+    @patch("src.functions.operational_functions.select_item", select_item_mock)
+    @patch("src.functions.operational_functions.update", update_mock)
+    def test_delete_product2(
+        self,
+    ):
+        product_list = [
+            {"id": "0123", "name": "Apple", "price": 2.50},
+            {"id": "4567", "name": "Banana", "price": 1.25},
+        ]
+
+        select_item_mock.return_value = 0, 0
+        update_mock = ""
+
+        test_delete_product = product_list
+
+        expected = test_delete_product
+        actual = delete_product(product_list)
+        assert expected == actual
