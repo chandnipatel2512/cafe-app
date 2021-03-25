@@ -27,3 +27,23 @@ class Testing(unittest.TestCase):
         expected = test_delete_courier
         actual = delete_courier(courier_list)
         assert expected == actual
+
+    # Test delete courier function to ensure it cancels when user inputs 0
+    @patch("src.functions.operational_functions.select_item", select_item_mock)
+    @patch("src.functions.operational_functions.update", update_mock)
+    def test_delete_courier2(
+        self,
+    ):
+        courier_list = [
+            {"id": "0123", "name": "DHL", "phone": "07874567266"},
+            {"id": "4567", "name": "Royal Mail", "phone": "07874567277"},
+        ]
+
+        select_item_mock.return_value = 0, 0
+        update_mock = ""
+
+        test_delete_courier = courier_list
+
+        expected = test_delete_courier
+        actual = delete_courier(courier_list)
+        assert expected == actual
