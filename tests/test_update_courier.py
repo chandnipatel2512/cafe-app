@@ -23,13 +23,35 @@ class Testing(unittest.TestCase):
             {"id": "0123", "name": "DHL", "phone": "07874567266"},
             {"id": "4567", "name": "Royal Mail", "phone": "07874567277"},
         ]
-        select_item_mock.return_value = ["4567", "Royal Mail"]
+        select_item_mock.return_value = "4567", "Royal Mail"
         mock_input.side_effect = ["a", "Parcel Force", ""]
         update_mock = ""
 
         test_update_courier = [
             {"id": "0123", "name": "DHL", "phone": "07874567266"},
             {"id": "4567", "name": "Parcel Force", "phone": "07874567277"},
+        ]
+
+        expected = test_update_courier
+        actual = update_courier(courier_list)
+        assert expected == actual
+
+    # Test update courier function to ensure it cancels if 0 is entered
+    @patch("src.functions.operational_functions.select_item", select_item_mock)
+    @patch("src.functions.operational_functions.update", update_mock)
+    def test_update_courier2(
+        self,
+    ):
+        courier_list = [
+            {"id": "0123", "name": "DHL", "phone": "07874567266"},
+            {"id": "4567", "name": "Royal Mail", "phone": "07874567277"},
+        ]
+        select_item_mock.return_value = 0, 0
+        update_mock = ""
+
+        test_update_courier = [
+            {"id": "0123", "name": "DHL", "phone": "07874567266"},
+            {"id": "4567", "name": "Royal Mail", "phone": "07874567277"},
         ]
 
         expected = test_update_courier
