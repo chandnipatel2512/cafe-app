@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
+# Credentials being pulled in from dotenv file
 HOST = os.environ.get("MYSQL_HOST")
 USER = os.environ.get("MYSQL_USER")
 PASSWORD = os.environ.get("MYSQL_PASS")
